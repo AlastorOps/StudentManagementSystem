@@ -1,3 +1,11 @@
+# SQLite database files
+*.sqlite
+*.sqlite3
+
+# SQLite WAL + SHM files
+*-wal
+*-shm
+
 # 🔹 Python cache
 __pycache__/
 *.py[cod]
