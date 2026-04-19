@@ -1,0 +1,31 @@
+import sys
+import os
+
+# Ensure the project root is on the path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from PyQt6.QtWidgets import QApplication
+from app.database.migrations import run_migrations
+from app.views.main_window import MainWindow
+from app.config.settings import APP_NAME
+
+
+def main():
+    os.makedirs("database", exist_ok=True)
+    run_migrations()
+
+    app = QApplication(sys.argv)
+    app.setApplicationName(APP_NAME)
+
+    qss_path = os.path.join(os.path.dirname(__file__), "app", "assets", "styles", "theme_light.qss")
+    if os.path.exists(qss_path):
+        with open(qss_path, "r", encoding="utf-8") as f:
+            app.setStyleSheet(f.read())
+
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()
