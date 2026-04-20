@@ -62,7 +62,9 @@ class CourseListView(QWidget):
         self._table.setRowCount(len(self._courses))
         self._table.setSortingEnabled(False)
         for i, c in enumerate(self._courses):
-            self._table.setItem(i, 0, QTableWidgetItem(c.code))
+            code_item = QTableWidgetItem(c.code)
+            code_item.setData(Qt.ItemDataRole.UserRole, c.id)
+            self._table.setItem(i, 0, code_item)
             self._table.setItem(i, 1, QTableWidgetItem(c.name))
             self._table.setItem(i, 2, QTableWidgetItem(str(c.credits)))
             self._table.setItem(i, 3, QTableWidgetItem(c.description or ""))
@@ -72,9 +74,13 @@ class CourseListView(QWidget):
 
     def _selected_course(self) -> Course | None:
         row = self._table.currentRow()
-        if row < 0 or row >= len(self._courses):
+        if row < 0:
             return None
-        return self._courses[row]
+        code_item = self._table.item(row, 0)
+        if code_item is None:
+            return None
+        course_id = code_item.data(Qt.ItemDataRole.UserRole)
+        return next((c for c in self._courses if c.id == course_id), None)
 
     def _add_course(self):
         dlg = CourseForm(parent=self)

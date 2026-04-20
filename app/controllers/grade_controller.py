@@ -1,5 +1,5 @@
 from app.models.grade import Grade, GradeRepository
-from app.utils.validators import validate_grade
+from app.utils.validators import validate_grade, validate_score
 from app.utils.helpers import numeric_to_letter
 
 
@@ -28,7 +28,7 @@ class GradeController:
             return False, f"Database error: {msg}"
 
     def update_grade(self, grade_id: int, score: float, notes: str = "") -> tuple[bool, str | Grade]:
-        errors = validate_grade({"enrollment_id": 1, "grade": score})  # enrollment_id placeholder for validation
+        errors = validate_score(score)
         if errors:
             return False, "\n".join(errors)
         try:

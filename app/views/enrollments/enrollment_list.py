@@ -60,7 +60,9 @@ class EnrollmentListView(QWidget):
         self._table.setRowCount(len(self._rows))
         self._table.setSortingEnabled(False)
         for i, row in enumerate(self._rows):
-            self._table.setItem(i, 0, QTableWidgetItem(str(row["student_name"])))
+            name_item = QTableWidgetItem(str(row["student_name"]))
+            name_item.setData(Qt.ItemDataRole.UserRole, row["id"])
+            self._table.setItem(i, 0, name_item)
             self._table.setItem(i, 1, QTableWidgetItem(str(row["course_display_name"])))
             self._table.setItem(i, 2, QTableWidgetItem(format_date(str(row["enrolled_at"])) if row["enrolled_at"] else ""))
         self._table.setSortingEnabled(True)
@@ -68,9 +70,12 @@ class EnrollmentListView(QWidget):
 
     def _selected_enrollment_id(self) -> int | None:
         row = self._table.currentRow()
-        if row < 0 or row >= len(self._rows):
+        if row < 0:
             return None
-        return self._rows[row]["id"]
+        name_item = self._table.item(row, 0)
+        if name_item is None:
+            return None
+        return name_item.data(Qt.ItemDataRole.UserRole)
 
     def _add_enrollment(self):
         dlg = EnrollmentForm(parent=self)

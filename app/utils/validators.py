@@ -50,19 +50,20 @@ def validate_course(data: dict) -> list[str]:
     return errors
 
 
-def validate_grade(data: dict) -> list[str]:
+def validate_score(score) -> list[str]:
     errors = []
-
-    enrollment_id = data.get("enrollment_id")
-    grade = data.get("grade")
-
-    if not enrollment_id:
-        errors.append("Enrollment is required.")
     try:
-        grade_float = float(grade)
+        grade_float = float(score)
         if grade_float < 0.0 or grade_float > 100.0:
             errors.append("Grade must be between 0.0 and 100.0.")
     except (TypeError, ValueError):
         errors.append("Grade must be a valid number.")
+    return errors
 
+
+def validate_grade(data: dict) -> list[str]:
+    errors = []
+    if not data.get("enrollment_id"):
+        errors.append("Enrollment is required.")
+    errors.extend(validate_score(data.get("grade")))
     return errors

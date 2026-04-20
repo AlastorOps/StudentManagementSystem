@@ -1,7 +1,6 @@
 import sys
 import os
 
-# Ensure the project root is on the path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from PyQt6.QtWidgets import QApplication
@@ -11,7 +10,6 @@ from app.config.settings import APP_NAME
 
 
 def main():
-    os.makedirs("database", exist_ok=True)
     run_migrations()
 
     app = QApplication(sys.argv)

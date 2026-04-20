@@ -93,7 +93,9 @@ class StudentListView(QWidget):
         self._table.setSortingEnabled(False)
         self._table.setRowCount(len(students))
         for i, s in enumerate(students):
-            self._table.setItem(i, 0, _NumericItem(str(s.id)))
+            id_item = _NumericItem(str(s.id))
+            id_item.setData(Qt.ItemDataRole.UserRole, s.id)
+            self._table.setItem(i, 0, id_item)
             self._table.setItem(i, 1, QTableWidgetItem(s.full_name))
             self._table.setItem(i, 2, QTableWidgetItem(s.email))
             self._table.setItem(i, 3, QTableWidgetItem(s.phone or ""))
@@ -110,9 +112,13 @@ class StudentListView(QWidget):
 
     def _selected_student(self) -> Student | None:
         row = self._table.currentRow()
-        if row < 0 or row >= len(self._students):
+        if row < 0:
             return None
-        return self._students[row]
+        id_item = self._table.item(row, 0)
+        if id_item is None:
+            return None
+        student_id = id_item.data(Qt.ItemDataRole.UserRole)
+        return next((s for s in self._students if s.id == student_id), None)
 
     def _add_student(self):
         dlg = StudentForm(parent=self)

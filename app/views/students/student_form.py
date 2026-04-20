@@ -72,9 +72,9 @@ class StudentForm(QDialog):
         self._dob = QDateEdit()
         self._dob.setCalendarPopup(True)
         self._dob.setDisplayFormat("yyyy-MM-dd")
-        self._dob.setDate(QDate.currentDate())
-        self._dob.setSpecialValueText(" ")
         self._dob.setMinimumDate(QDate(1900, 1, 1))
+        self._dob.setSpecialValueText(" ")
+        self._dob.setDate(QDate(1900, 1, 1))
         form.addRow("Date of Birth", self._dob)
 
         layout.addLayout(form)
@@ -100,7 +100,9 @@ class StudentForm(QDialog):
             try:
                 self._dob.setDate(QDate.fromString(student.date_of_birth[:10], "yyyy-MM-dd"))
             except Exception:
-                pass
+                self._dob.setDate(QDate(1900, 1, 1))
+        else:
+            self._dob.setDate(QDate(1900, 1, 1))
 
     def _clear_errors(self):
         for lbl in [self._err_first_name, self._err_last_name, self._err_email, self._err_phone]:
@@ -108,7 +110,8 @@ class StudentForm(QDialog):
 
     def _submit(self):
         self._clear_errors()
-        dob_text = self._dob.date().toString("yyyy-MM-dd")
+        dob_date = self._dob.date()
+        dob_text = dob_date.toString("yyyy-MM-dd") if dob_date > QDate(1900, 1, 1) else ""
         data = {
             "first_name": self._first_name.text(),
             "last_name": self._last_name.text(),

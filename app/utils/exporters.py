@@ -1,5 +1,8 @@
 import csv
+import logging
 from app.models.student import Student
+
+logger = logging.getLogger(__name__)
 
 
 def export_students_to_csv(students: list[Student], filepath: str) -> bool:
@@ -10,5 +13,6 @@ def export_students_to_csv(students: list[Student], filepath: str) -> bool:
             for s in students:
                 writer.writerow([s.id, s.first_name, s.last_name, s.email, s.phone or "", s.date_of_birth or "", s.created_at or ""])
         return True
-    except Exception:
+    except Exception as exc:
+        logger.error("CSV export failed: %s", exc)
         return False
