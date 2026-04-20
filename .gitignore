@@ -1,56 +1,51 @@
-# SQLite database files
+# ── SQLite database ──────────────────────────────────────────
 *.sqlite
 *.sqlite3
-
-# SQLite WAL + SHM files
+*.db
 *-wal
 *-shm
 
-# 🔹 Python cache
+# ── Python cache ─────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *$py.class
 
-# 🔹 Virtual environments
+# ── Virtual environments ─────────────────────────────────────
 venv/
 env/
 ENV/
 .venv/
 
-# 🔹 Environment variables
+# ── Environment variables ────────────────────────────────────
 .env
 .env.*
 
-# 🔹 Logs
+# ── Logs ─────────────────────────────────────────────────────
 *.log
 
-# 🔹 SQLite database (if you use one)
-*.db
-*.sqlite3
-
-# 🔹 VS Code
+# ── IDE / OS ─────────────────────────────────────────────────
 .vscode/
-
-# 🔹 PyCharm / IntelliJ
 .idea/
-
-# 🔹 OS files
 .DS_Store
 Thumbs.db
 
-# 🔹 Test / coverage
+# ── Test / coverage ──────────────────────────────────────────
 .coverage
 htmlcov/
 .pytest_cache/
+pytest-cache-files-*/
 
-# 🔹 Distribution / packaging
+# ── PyInstaller build output ─────────────────────────────────
+# Keep: StudentManagementSystem.spec  (build config, should be committed)
 build/
 dist/
 *.egg-info/
 
-# 🔹 Temporary files
+# ── NSIS compiled installer output ───────────────────────────
+# Keep: installer.nsi  (source script, should be committed)
+*-Setup.exe
+
+# ── Temporary files ──────────────────────────────────────────
 *.tmp
 *.bak
-
-# 🔹 Jupyter Notebook
 .ipynb_checkpoints/

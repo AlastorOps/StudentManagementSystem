@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip show *)",
+      "Bash(pyinstaller StudentManagementSystem.spec --clean)",
+      "Bash(pyinstaller StudentManagementSystem.spec --clean -y)",
+      "Bash(makensis installer.nsi)",
+      "Bash(\"/c/Program Files \\(x86\\)/NSIS/makensis.exe\" installer.nsi)"
+    ]
+  }
+}

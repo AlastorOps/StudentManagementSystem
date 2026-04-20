@@ -15,7 +15,8 @@ def main():
     app = QApplication(sys.argv)
     app.setApplicationName(APP_NAME)
 
-    qss_path = os.path.join(os.path.dirname(__file__), "app", "assets", "styles", "theme_light.qss")
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    qss_path = os.path.join(base_path, "app", "assets", "styles", "theme_light.qss")
     if os.path.exists(qss_path):
         with open(qss_path, "r", encoding="utf-8") as f:
             app.setStyleSheet(f.read())

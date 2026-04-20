@@ -94,7 +94,6 @@ QStackedWidget,
 #dashboardHero,
 #tableCard,
 #statCard,
-QTableWidget,
 QDialog,
 QMessageBox {
     background-color: #1a211f;
@@ -254,39 +253,58 @@ QDateEdit::drop-down {
 }
 
 QTableWidget {
+    background-color: #1a211f;
+    border: 1px solid #27302d;
+    border-radius: 14px;
     gridline-color: transparent;
     alternate-background-color: #161c1a;
-    selection-background-color: transparent;
-    selection-color: #d7dfdd;
+    selection-background-color: #23352f;
+    selection-color: #f4efe4;
     outline: 0;
-    padding: 6px;
+    padding: 0;
 }
 
 QTableWidget::item {
     padding: 11px 12px;
     border-bottom: 1px solid #242c29;
+    border-right: none;
 }
 
 QTableWidget::item:selected {
     background-color: #23352f;
     color: #f4efe4;
+    border-bottom: 1px solid #2e4a3e;
+}
+
+QHeaderView {
+    background-color: #212826;
+    border: none;
 }
 
 QHeaderView::section {
     background-color: #212826;
     color: #98a8a3;
     border: none;
-    border-bottom: 1px solid #313a37;
-    padding: 12px;
+    border-bottom: 2px solid #313a37;
+    border-right: 1px solid #313a37;
+    padding: 10px 12px;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
 }
 
+QHeaderView::section:last {
+    border-right: none;
+}
+
+QHeaderView::section:only-one {
+    border-right: none;
+}
+
 QTableWidget QTableCornerButton::section {
     background-color: #212826;
     border: none;
-    border-bottom: 1px solid #313a37;
+    border-bottom: 2px solid #313a37;
 }
 
 QGroupBox {
