@@ -34,7 +34,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle(APP_NAME)
-        self.setMinimumSize(1000, 650)
+        self.setMinimumSize(1200, 780)
+        self.resize(1200, 780)
         self._dark_mode = False
         self._build_ui()
         self._nav_buttons[0].set_active(True)
