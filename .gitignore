@@ -49,3 +49,7 @@ dist/
 *.tmp
 *.bak
 .ipynb_checkpoints/
+tempCodeRunnerFile.py
+
+# ── Claude Code ───────────────────────────────────────────────
+.claude/
